@@ -1,0 +1,38 @@
+<?php
+require_once '../model/Conexao.php';
+require_once '../model/Menu.php';
+
+$db = new Conexao();
+$conn = $db->connect();
+$menuObj = new Menu($conn);
+$menu = $menuOnj -> getMenuCompleto();
+?>
+
+<header class="container-header">
+    <div class="logo-principal">
+        <img>
+        <h2>Tanaka Autopeças</h2>
+    </div>
+    <div class="container-menu">        
+        <nav>
+            <ul class="menu">
+                 <li><a href="../view/Home.html">Sobre</a></li>
+                <?php foreach($menu as $categoria => $subcategoria): ?>                
+                    <li><a href=""><?php echo $categoria; ?></a>
+                        <ul>
+                            <?php foreach($subcategoria as $sub): ?>
+                                <li>
+                                    <a href="../view/card.php?subcategoria=<?php echo urlencode($sub);?>">
+                                    <?php echo $sub; ?> 
+                                    </a>
+                                </li>
+                                <?php endforeach; ?>
+                        </ul>
+                    </li>  
+                <?php endforeach; ?>
+                <li><a href="../view/Sobre.html">Sobre</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
